@@ -16,7 +16,7 @@ namespace ByteBank.Modelos
             this.TotalBonificacao += funcionario.GetBonificacao();
         }
 
-        public double GetBonificao()
+        internal protected double GetBonificao()
         {
             return this.TotalBonificacao;
         }
