@@ -32,6 +32,14 @@ namespace ByteBank.SistemaAgencia
             //Agora utilizando Humanizer
             mensagem = "Vencimento em " + TimeSpanHumanizeExtensions.Humanize(diferencaData);
             Console.WriteLine(mensagem);
+            Console.WriteLine();
+
+            // pagina?argumentos
+            // 012345678
+
+            string url = "pagina?argumentos";
+            string argumentos = url.Substring(7);
+            Console.WriteLine(argumentos);
 
 
             Console.ReadLine();
