@@ -8,7 +8,7 @@ namespace ByteBank.Modelos.Funcionarios
 {
     public abstract class FuncionarioAutenticavel : Funcionario, IAutenticavel
     {
-        private AutenticacaoHelper autenticacaoHelper = new AutenticacaoHelper();
+        private AutenticacaoHelper autenticacaoHelper = new();
         public string Login { get; set; }
         public string Senha { get; set; }
         public FuncionarioAutenticavel(string nome, string cpf, double salario) : base(nome, cpf, salario)

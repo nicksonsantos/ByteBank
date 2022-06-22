@@ -14,7 +14,7 @@ namespace ByteBank.Modelos.Funcionarios
 
         public override void AumentarSalario()
         {
-            this.Salario = this.Salario * 0.15;
+            Salario *= 0.15;
         }
 
         internal protected override double GetBonificacao()
