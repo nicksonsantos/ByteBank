@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ByteBank.Modelos
 {
+    /// <summary>
+    /// Define uma Conta Corrente do banco ByteBank.
+    /// </summary>
     public class ContaCorrente
     {
         
@@ -19,6 +22,14 @@ namespace ByteBank.Modelos
         public int ContadorTransferenciasNaoPermitidas { get; private set; }
         public static int TotalDeContasCriadas { get; private set; }
 
+        /// <summary>
+        /// Cria uma instância de Conta Corrente com os argumentos utilizados.
+        /// </summary>
+        /// <param name="titular"> Representa o valor da propriedade <see cref="Cliente"> e deve ser uma instância de Cliente</param>
+        /// <param name="conta"> Representa o valor da propriedade <see cref="Conta"> e não pode ser uma string vazia</param>
+        /// <param name="numeroAgencia"> Representa o valor da propriedade <see cref="NumeroAgencia"> e deve possuir um valor maior que zero</param>
+        /// <param name="nomeAgencia"> Representa o valor da propriedade <see cref="NomeAgencia"> e não pode ser uma string vazia</param>
+        /// <exception cref="ArgumentException"></exception>
         public ContaCorrente(Cliente titular, string conta, int numeroAgencia, string nomeAgencia)
         {
             if (titular == null)
@@ -60,32 +71,6 @@ namespace ByteBank.Modelos
             Console.WriteLine($"Saldo R$ {String.Format("{0:0.00}", this.Saldo)}");
         }
 
-        public void Sacar(double valor)
-        {
-            if (FundosInsuficientes(valor) || SaldoNegativo())
-            {
-                throw new SaldoInsuficienteException("Saldo insuficiente");
-            }
-
-            Saldo = Saldo - valor;
-        }
-
-        private bool FundosInsuficientes(double valor)
-        {
-            if (valor >= Saldo)
-                return true;
-
-            return false;
-        }
-
-        public bool SaldoNegativo()
-        {
-            if (this.Saldo < 0)
-                return true;
-
-            return false;
-        }
-        
         public void Transferir(double valor, ContaCorrente destino)
         {
             try
@@ -101,6 +86,41 @@ namespace ByteBank.Modelos
             this.Saldo = this.Saldo - valor;
             destino.Saldo = destino.Saldo + valor;
         }
+
+        /// <summary>
+        /// Realiza o saque e atualiza o valor da propriedade <see cref="Saldo"/>
+        /// </summary>
+        /// <param name="valor"> Representa o valor do saque, deve ser maior que zero e menor que o <see cref="Saldo"/></param>
+        /// <exception cref="ValorNegativoException"> Exceção lançada quando um valor negativo é utilizado no argumento <paramref name="valor"/></exception>
+        /// <exception cref="SaldoInsuficienteException"> Exceção lançada quando o valor de <paramref name="valor"/> é maior que o valor da propriedade <see cref="Saldo"/></exception>
+        public void Sacar(double valor)
+        {
+            if (ValorNegativo(valor))
+            {
+                throw new ValorNegativoException("Valor negativo informado");
+            }
+            if (FundosInsuficientes(valor))
+            {
+                throw new SaldoInsuficienteException("Saldo insuficiente");
+            }
+
+            Saldo = Saldo - valor;
+        }
+        public bool ValorNegativo(double valor)
+        {
+            if (valor < 0)
+                return true;
+
+            return false;
+        }
+
+        private bool FundosInsuficientes(double valor)
+        {
+            if (Saldo < valor)
+                return true;
+
+            return false;
+        }        
 
     }
 }
