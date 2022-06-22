@@ -38,8 +38,16 @@ namespace ByteBank.SistemaAgencia
             // 012345678
 
             string url = "pagina?argumentos";
-            string argumentos = url.Substring(7);
+
+            int indiceInterrogacao = url.IndexOf("?");
+            Console.WriteLine("indiceInterrogacao: " + indiceInterrogacao);
+            string argumentos = url.Substring(indiceInterrogacao + 1);
             Console.WriteLine(argumentos);
+            Console.WriteLine();
+
+            string site = "www.bytebank.com.br/conversor?moedaOrigem=real&moedaDestino=dolar";
+            ExtratorValorDeArgumentosURL extratorValorDeArgumentosURL = new ExtratorValorDeArgumentosURL(site);
+            Console.WriteLine(extratorValorDeArgumentosURL.GetValor("moedaDestino"));
 
 
             Console.ReadLine();
