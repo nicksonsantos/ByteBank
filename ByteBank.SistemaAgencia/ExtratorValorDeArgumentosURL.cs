@@ -8,7 +8,7 @@ namespace ByteBank.SistemaAgencia
 {
     public class ExtratorValorDeArgumentosURL
     {
-        private string argumentos { get; }
+        private string _argumentos { get; }
         public string URL { get; }
         public ExtratorValorDeArgumentosURL(string url)
         {
@@ -16,19 +16,27 @@ namespace ByteBank.SistemaAgencia
                 throw new ArgumentNullException("O argumento url não pode ser nulo ou vazio.", nameof(url));
 
             int indiceInterrogacao = url.IndexOf('?');
-            argumentos = url.Substring(indiceInterrogacao + 1);
+            _argumentos = url.Substring(indiceInterrogacao + 1);
 
             URL = url;
         }
 
-        // moedaOrigem=real&moedaDestino=dolar
         public string GetValor(string nomeParametro)
         {
-            int indiceParametro = argumentos.IndexOf(nomeParametro);
+            nomeParametro = nomeParametro.ToUpper();
+            string argumentoEmCaixaAlta = _argumentos.ToUpper();
 
-            int indiceValor = indiceParametro + 1 + nomeParametro.Length;
+            string termo = nomeParametro + "=";
+            int indiceParametro = argumentoEmCaixaAlta.IndexOf(termo);
 
-            return argumentos.Substring(indiceValor);
+            int indiceValor = indiceParametro + termo.Length;            
+            string resultado = _argumentos.Substring(indiceValor);
+            int indiceEComercial = resultado.IndexOf('&');
+
+            if (indiceEComercial == -1)
+                return resultado;
+
+            return resultado.Remove(indiceEComercial);
         }
 
     }
