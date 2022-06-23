@@ -9,34 +9,38 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            //// Alura - Curso de C# parte 5: bibliotecas DLLs, documentação e usando o NuGet
+            // Alura - Curso de C# parte 5: bibliotecas DLLs, documentação e usando o NuGet
 
-            //DateTime dataFimPagamento = new DateTime(2022, 9, 5);
-            //DateTime dataCorrente = DateTime.Today;
-            //TimeSpan diferencaData = dataFimPagamento - dataCorrente;
-            ////Utilizando a minha função
-            //string mensagem = "Vencimento em " + GetIntervaloDeTempoLegivel(diferencaData);
-            //Console.WriteLine(mensagem);
+            DateTime dataFimPagamento = new DateTime(2022, 9, 5);
+            DateTime dataCorrente = DateTime.Today;
+            TimeSpan diferencaData = dataFimPagamento - dataCorrente;
+            //Utilizando a minha função
+            string mensagem = "Vencimento em " + GetIntervaloDeTempoLegivel(diferencaData);
+            Console.WriteLine(mensagem);
 
-            ////Agora utilizando Humanizer
-            //mensagem = "Vencimento em " + TimeSpanHumanizeExtensions.Humanize(diferencaData);
-            //Console.WriteLine(mensagem + "\n");
+            //Agora utilizando Humanizer
+            mensagem = "Vencimento em " + TimeSpanHumanizeExtensions.Humanize(diferencaData);
+            Console.WriteLine(mensagem + "\n");
 
-            //// Alura - Curso de C# parte 6: Strings, expressões regulares e a classe Object
+            // Alura - Curso de C# parte 6: Strings, expressões regulares e a classe Object
 
-            //TestaStrings();
+            TestaStrings();
 
-            //TestaRegex();
+            TestaRegex();
 
-            //TestaObjects();
+            TestaObjects();
 
-            //// Alura - Curso de C# parte 7: Array e tipos genéricos
+            // Alura - Curso de C# parte 7: Array e tipos genéricos
 
-            //TestaArrayInt();
+            TestaArrayInt();
 
-            //TestaArrayContaCorrente();
+            TestaArrayContaCorrente();
 
             TestaListaContaCorrente();
+
+            TestaListaDeObject();
+
+            TestaLista();
 
             Console.ReadLine();
         }
@@ -279,12 +283,50 @@ namespace ByteBank.SistemaAgencia
             );
             Console.WriteLine();
             Console.WriteLine("Lista 2:");
-            Console.WriteLine(listaDeContaCorrente2);
+            Console.WriteLine(listaDeContaCorrente2);     
 
-            
+            FimDoBloco();
+        }
+
+        static void TestaListaDeObject()
+        {
+            Console.WriteLine("Função TestaListaDeObject()");
+
+            Random rnd = new Random();
+
+            ListaDeObject listaDeIdades = new ListaDeObject();
+
+            for (int i = 0; i < rnd.Next(1, 20); i++)
+            {
+                listaDeIdades.Adicionar(rnd.Next(1, 120));
+            }
+
+            listaDeIdades.Adicionar("nickson");
+
+            listaDeIdades.AdicionarVarios(7, 13, 28);
+
+            Console.WriteLine(listaDeIdades);
 
             FimDoBloco();
 
+        }
+
+        static void TestaLista()
+        {
+            Console.WriteLine("Função TestaLista()");
+
+            Lista<int> idades = new Lista<int>();
+            idades.Adicionar(5);
+            idades.AdicionarVarios(13, 17, 24, 78);
+            Console.WriteLine(idades);
+
+            for (int i = 0; i < idades.Tamanho; i++)
+            {
+                int idadeAtual = idades[i];
+                Console.WriteLine("Idade: " + idadeAtual);
+            }
+
+            FimDoBloco();
         }
     }
 }
