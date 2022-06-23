@@ -21,5 +21,15 @@ namespace ByteBank.Modelos
             Profissao = profissao;
             TotalClientesCadastrados += 1;
         }
+
+        public override bool Equals(object obj)
+        {
+            Cliente outroCliente = obj as Cliente;
+
+            if (outroCliente == null)
+                return false;
+
+            return Cpf == outroCliente.Cpf;
+        }
     }
 }

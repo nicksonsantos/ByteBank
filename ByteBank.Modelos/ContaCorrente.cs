@@ -62,15 +62,6 @@ namespace ByteBank.Modelos
             Saldo = Saldo + valor;
         }
 
-        public void ExibeInformacoes()
-        {
-            Console.WriteLine($"Titular da conta: {this.Cliente.Nome}");
-            Console.WriteLine($"Número da conta: {this.Conta}");
-            Console.WriteLine($"Agência: {this.NumeroAgencia}");
-            Console.WriteLine($"Agência: {this.NomeAgencia}");
-            Console.WriteLine($"Saldo R$ {String.Format("{0:0.00}", this.Saldo)}");
-        }
-
         public void Transferir(double valor, ContaCorrente destino)
         {
             try
@@ -120,7 +111,19 @@ namespace ByteBank.Modelos
                 return true;
 
             return false;
-        }        
+        }
 
+        public override string ToString()
+        {
+            string informacoesConta = null;
+
+            informacoesConta += $"Titular da conta: {Cliente.Nome}\n";
+            informacoesConta += $"Número da conta: {Conta}\n";
+            informacoesConta += $"Agência: {NumeroAgencia}\n";
+            informacoesConta += $"Agência: {NomeAgencia}\n";
+            informacoesConta += $"Saldo R$ {String.Format("{0:0.00}", Saldo)}\n";
+
+            return informacoesConta;
+        }
     }
 }

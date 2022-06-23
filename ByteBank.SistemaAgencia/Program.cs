@@ -9,19 +9,32 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            Desenvolvedor nickson2 = new Desenvolvedor("Nickson", "123654987-11", 10000);
-            Console.WriteLine("Salario: " + nickson2.Salario);
+            Desenvolvedor nickson = new Desenvolvedor("Nickson", "123654987-11", 10000);
+
             Console.WriteLine("Total de funcionarios: " + Funcionario.TotalDeFuncionarios);
+
             Designer mv = new Designer("Marcos Vinicius", "123654987-11", 10000);
+
             Console.WriteLine("Total de funcionarios: " + Funcionario.TotalDeFuncionarios);
             Console.WriteLine();
 
-            Cliente nickson = new Cliente("Nickson", "123456789-88", "Desenvolvedor");
-            ContaCorrente conta = new ContaCorrente(nickson, "123", 1597, "Santander");
+            Cliente nickson1 = new Cliente("Nickson", "123456789-88", "Desenvolvedor");
+            Cliente nickson2 = new Cliente("Nickson", "123456789-88", "Desenvolvedor");
+
+            bool comparacao = nickson1 == nickson2 ? true : false;
+            Console.WriteLine("nickson1 = nickson2 ? " + comparacao);
+
+            comparacao = nickson1.Equals(nickson2);
+            Console.WriteLine("nickson1 = nickson2 ? " + comparacao);
+            Console.WriteLine();
+
+            ContaCorrente conta = new ContaCorrente(nickson1, "123", 1597, "Santander");
+            comparacao = nickson1.Equals(conta);
+            Console.WriteLine("nickson1 = conta ? " + comparacao);
+
             conta.Depositar(1000);
             conta.Sacar(500);
-            conta.ExibeInformacoes();
-            Console.WriteLine();
+            Console.WriteLine(conta);
 
             DateTime dataFimPagamento = new DateTime(2022, 9, 5);
             DateTime dataCorrente = DateTime.Today;
