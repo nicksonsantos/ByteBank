@@ -53,14 +53,60 @@ namespace ByteBank.Modelos
 
         private bool tamanhoEhSuficiente(int tamanhoLista)
         {
-            
-
             if (_proximaPosicao >= tamanhoLista)
             {
                 return false;
             }
 
             return true;
+        }
+
+        public void Remover(ContaCorrente item)
+        {
+            int indiceItem = Encontra(item);
+
+            for(int i = indiceItem; i < (_proximaPosicao - 1); i++)
+            {
+                _itens[i] = _itens[i + 1];
+            }
+
+            _proximaPosicao--;
+            _itens[_proximaPosicao] = null;
+        }
+
+        public int Encontra(ContaCorrente item)
+        {
+            int indiceItem = -1;
+
+            for (int i = 0; i < _proximaPosicao; i++)
+            {
+                ContaCorrente itemAtual = _itens[i];
+
+                if (itemAtual.Equals(item))
+                {
+                    indiceItem = i;
+                    break;
+                }
+            }
+
+            return indiceItem;
+        }
+
+        public override string ToString()
+        {
+            string saida = "[";
+
+            for (int i = 0; i < _proximaPosicao; i++)
+            {
+                saida += _itens[i].Conta;
+
+                if (i != (_proximaPosicao - 1))
+                    saida += ", ";
+            }
+
+            saida += "]";
+
+            return saida;
         }
     }
 }

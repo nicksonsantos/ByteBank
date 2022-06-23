@@ -9,32 +9,32 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            // Alura - Curso de C# parte 5: bibliotecas DLLs, documentação e usando o NuGet
+            //// Alura - Curso de C# parte 5: bibliotecas DLLs, documentação e usando o NuGet
 
-            DateTime dataFimPagamento = new DateTime(2022, 9, 5);
-            DateTime dataCorrente = DateTime.Today;
-            TimeSpan diferencaData = dataFimPagamento - dataCorrente;
-            //Utilizando a minha função
-            string mensagem = "Vencimento em " + GetIntervaloDeTempoLegivel(diferencaData);
-            Console.WriteLine(mensagem);
+            //DateTime dataFimPagamento = new DateTime(2022, 9, 5);
+            //DateTime dataCorrente = DateTime.Today;
+            //TimeSpan diferencaData = dataFimPagamento - dataCorrente;
+            ////Utilizando a minha função
+            //string mensagem = "Vencimento em " + GetIntervaloDeTempoLegivel(diferencaData);
+            //Console.WriteLine(mensagem);
 
-            //Agora utilizando Humanizer
-            mensagem = "Vencimento em " + TimeSpanHumanizeExtensions.Humanize(diferencaData);
-            Console.WriteLine(mensagem + "\n");
+            ////Agora utilizando Humanizer
+            //mensagem = "Vencimento em " + TimeSpanHumanizeExtensions.Humanize(diferencaData);
+            //Console.WriteLine(mensagem + "\n");
 
-            // Alura - Curso de C# parte 6: Strings, expressões regulares e a classe Object
+            //// Alura - Curso de C# parte 6: Strings, expressões regulares e a classe Object
 
-            TestaStrings();
+            //TestaStrings();
 
-            TestaRegex();
+            //TestaRegex();
 
-            TestaObjects();
+            //TestaObjects();
 
-            // Alura - Curso de C# parte 7: Array e tipos genéricos
+            //// Alura - Curso de C# parte 7: Array e tipos genéricos
 
-            TestaArrayInt();
+            //TestaArrayInt();
 
-            TestaArrayContaCorrente();
+            //TestaArrayContaCorrente();
 
             TestaListaContaCorrente();
 
@@ -237,12 +237,26 @@ namespace ByteBank.SistemaAgencia
             listaDeContaCorrente1.Adicionar(new ContaCorrente(cr7, "0003", rnd.Next(), "ByteBank01"));
             Console.WriteLine();
 
+            ContaCorrente contaDoMessi = new ContaCorrente(messi, "0002", 1, "ByteBank01");
             // Lista 2 inicializada sem parametro, logo, inicializa com espaço 1 como definimos no construtor
             ListaDeContaCorrente listaDeContaCorrente2 = new ListaDeContaCorrente();
             Console.WriteLine("Lista 2");
-            listaDeContaCorrente2.Adicionar(new ContaCorrente(neymar, "0001", rnd.Next(), "ByteBank01"));
-            listaDeContaCorrente2.Adicionar(new ContaCorrente(messi, "0002", rnd.Next(), "ByteBank01"));
-            listaDeContaCorrente2.Adicionar(new ContaCorrente(cr7, "0003", rnd.Next(), "ByteBank01"));
+            listaDeContaCorrente2.Adicionar(new ContaCorrente(neymar, "0001", 1, "ByteBank01"));
+            listaDeContaCorrente2.Adicionar(contaDoMessi);
+            listaDeContaCorrente2.Adicionar(new ContaCorrente(cr7, "0003", 1, "ByteBank01"));
+            Console.WriteLine();
+
+            Console.WriteLine(listaDeContaCorrente2);
+
+            Console.WriteLine("A conta do Messi está no indice: " + listaDeContaCorrente2.Encontra(contaDoMessi));
+
+            listaDeContaCorrente2.Remover(contaDoMessi);
+
+            Console.WriteLine(listaDeContaCorrente2);
+
+            listaDeContaCorrente2.Adicionar(contaDoMessi);
+
+            Console.WriteLine(listaDeContaCorrente2);
 
             FimDoBloco();
 
