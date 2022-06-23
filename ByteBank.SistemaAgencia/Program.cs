@@ -36,8 +36,14 @@ namespace ByteBank.SistemaAgencia
 
             TestaArrayContaCorrente();
 
+            TestaListaContaCorrente();
 
+            Console.ReadLine();
+        }
 
+        static void FimDoBloco()
+        {
+            Console.WriteLine("Fim da função, aperte enter para prosseguir.");
             Console.ReadLine();
         }
 
@@ -68,6 +74,8 @@ namespace ByteBank.SistemaAgencia
 
         static void TestaStrings()
         {
+            Console.WriteLine("Função TestaStrings()");
+
             // pagina?argumentos
             // 012345678
             string url = "pagina?argumentos";
@@ -91,10 +99,14 @@ namespace ByteBank.SistemaAgencia
             Console.WriteLine(urlTeste.StartsWith("https://www.bytebank.com"));
             Console.WriteLine(urlTeste.EndsWith("cambio/"));
             Console.WriteLine(urlTeste.Contains("Bytebank") + "\n");
+
+            FimDoBloco();
         }
 
         static void TestaRegex()
         {
+            Console.WriteLine("Função TestaRegex()");
+
             // string padrao = "[0123456789][0123456789][0123456789][0123456789][-][0123456789][0123456789][0123456789][0123456789]";
             // string padrao = "[0-9][0-9][0-9][0-9][-][0-9][0-9][0-9][0-9]";
             // string padrao = "[0-9]{4,5}[-][0-9]{4}";
@@ -105,10 +117,14 @@ namespace ByteBank.SistemaAgencia
 
             Match resultado = Regex.Match(textoDeTeste, padrao);
             Console.WriteLine(resultado.Value + "\n");
+
+            FimDoBloco();
         }
 
         static void TestaObjects()
         {
+            Console.WriteLine("Função TestaObjects()");
+
             Desenvolvedor nickson = new Desenvolvedor("Nickson", "123654987-11", 10000);
 
             Console.WriteLine("Total de funcionarios: " + Funcionario.TotalDeFuncionarios);
@@ -137,10 +153,14 @@ namespace ByteBank.SistemaAgencia
 
             // Testa novo método .ToString() da classe ContaCorrente
             Console.WriteLine(conta);
+
+            FimDoBloco();
         }
 
         static void TestaArrayInt()
         {
+            Console.WriteLine("Função TestaArrayInt()");
+
             Random rnd = new Random();
 
             int tamanhoVetor = rnd.Next(1, 20);
@@ -167,10 +187,14 @@ namespace ByteBank.SistemaAgencia
             double media = acumulador / tamanhoVetor;
 
             Console.WriteLine($"Total média = {media}\n");
+
+            FimDoBloco();
         }
 
         static void TestaArrayContaCorrente()
         {
+            Console.WriteLine("Função TestaArrayContaCorrente()");
+
             Random rnd = new Random();
 
             Cliente[] clientes = new Cliente[3];
@@ -191,6 +215,37 @@ namespace ByteBank.SistemaAgencia
                 ContaCorrente contaAtual = contas[indice];
                 Console.WriteLine($"Conta {indice} {contaAtual.Conta}");
             }
+
+            FimDoBloco();
+        }
+
+        static void TestaListaContaCorrente()
+        {
+            Console.WriteLine("Função TestaListaContaCorrente()");
+
+            Random rnd = new Random();
+
+            Cliente neymar = new Cliente("Neymar", "123", "Jogador de Futebol");
+            Cliente messi = new Cliente("Messi", "456", "Jogador de Futebol");
+            Cliente cr7 = new Cliente("Cristiano Ronaldo", "789", "Jogador de Futebol");
+
+            // Lista 1 inicializada com tamanho 3
+            ListaDeContaCorrente listaDeContaCorrente1 = new ListaDeContaCorrente(3);
+            Console.WriteLine("Lista 1");
+            listaDeContaCorrente1.Adicionar(new ContaCorrente(neymar, "0001", rnd.Next(), "ByteBank01"));
+            listaDeContaCorrente1.Adicionar(new ContaCorrente(messi, "0002", rnd.Next(), "ByteBank01"));
+            listaDeContaCorrente1.Adicionar(new ContaCorrente(cr7, "0003", rnd.Next(), "ByteBank01"));
+            Console.WriteLine();
+
+            // Lista 2 inicializada sem parametro, logo, inicializa com espaço 1 como definimos no construtor
+            ListaDeContaCorrente listaDeContaCorrente2 = new ListaDeContaCorrente();
+            Console.WriteLine("Lista 2");
+            listaDeContaCorrente2.Adicionar(new ContaCorrente(neymar, "0001", rnd.Next(), "ByteBank01"));
+            listaDeContaCorrente2.Adicionar(new ContaCorrente(messi, "0002", rnd.Next(), "ByteBank01"));
+            listaDeContaCorrente2.Adicionar(new ContaCorrente(cr7, "0003", rnd.Next(), "ByteBank01"));
+
+            FimDoBloco();
+
         }
     }
 }
