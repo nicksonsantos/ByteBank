@@ -9,32 +9,7 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            Desenvolvedor nickson = new Desenvolvedor("Nickson", "123654987-11", 10000);
-
-            Console.WriteLine("Total de funcionarios: " + Funcionario.TotalDeFuncionarios);
-
-            Designer mv = new Designer("Marcos Vinicius", "123654987-11", 10000);
-
-            Console.WriteLine("Total de funcionarios: " + Funcionario.TotalDeFuncionarios);
-            Console.WriteLine();
-
-            Cliente nickson1 = new Cliente("Nickson", "123456789-88", "Desenvolvedor");
-            Cliente nickson2 = new Cliente("Nickson", "123456789-88", "Desenvolvedor");
-
-            bool comparacao = nickson1 == nickson2 ? true : false;
-            Console.WriteLine("nickson1 = nickson2 ? " + comparacao);
-
-            comparacao = nickson1.Equals(nickson2);
-            Console.WriteLine("nickson1 = nickson2 ? " + comparacao);
-            Console.WriteLine();
-
-            ContaCorrente conta = new ContaCorrente(nickson1, "123", 1597, "Santander");
-            comparacao = nickson1.Equals(conta);
-            Console.WriteLine("nickson1 = conta ? " + comparacao);
-
-            conta.Depositar(1000);
-            conta.Sacar(500);
-            Console.WriteLine(conta);
+            // Alura - Curso de C# parte 5: bibliotecas DLLs, documentação e usando o NuGet
 
             DateTime dataFimPagamento = new DateTime(2022, 9, 5);
             DateTime dataCorrente = DateTime.Today;
@@ -45,49 +20,23 @@ namespace ByteBank.SistemaAgencia
 
             //Agora utilizando Humanizer
             mensagem = "Vencimento em " + TimeSpanHumanizeExtensions.Humanize(diferencaData);
-            Console.WriteLine(mensagem);
-            Console.WriteLine();
+            Console.WriteLine(mensagem + "\n");
 
-            // pagina?argumentos
-            // 012345678
-            string url = "pagina?argumentos";
+            // Alura - Curso de C# parte 6: Strings, expressões regulares e a classe Object
 
-            int indiceInterrogacao = url.IndexOf("?");
-            Console.WriteLine("indiceInterrogacao: " + indiceInterrogacao);
-            string argumentos = url.Substring(indiceInterrogacao + 1);
-            Console.WriteLine(argumentos);
-            Console.WriteLine();
+            TestaStrings();
 
-            string urlParametros = "http://www.bytebank.com/cambio?moedaOrigem=real&moedaDestino=dolar&valor=1500";
-            ExtratorValorDeArgumentosURL extratorValorDeArgumentosURL = new ExtratorValorDeArgumentosURL(urlParametros);
+            TestaRegex();
 
-            string valorMoedaOrigem = extratorValorDeArgumentosURL.GetValor("moedaOrigem");
-            Console.WriteLine("Valor de moedaOrigem: " + valorMoedaOrigem);
-            string valorMoedaDestino = extratorValorDeArgumentosURL.GetValor("moedaDestino");
-            Console.WriteLine("Valor de moedaDestino: " + valorMoedaDestino);
-            Console.WriteLine(extratorValorDeArgumentosURL.GetValor("VALOR"));
-            Console.WriteLine();
+            TestaObjects();
 
-            string urlTeste = "https://www.bytebank.com/cambio";
-            
-            Console.WriteLine(urlTeste.StartsWith("https://www.bytebank.com"));
-            Console.WriteLine(urlTeste.EndsWith("cambio/"));
-            Console.WriteLine(urlTeste.Contains("Bytebank"));
-            Console.WriteLine();
+            // Alura - Curso de C# parte 7: Array e tipos genéricos
 
-            // string padrao = "[0123456789][0123456789][0123456789][0123456789][-][0123456789][0123456789][0123456789][0123456789]";
-            // string padrao = "[0-9][0-9][0-9][0-9][-][0-9][0-9][0-9][0-9]";
-            // string padrao = "[0-9]{4,5}[-][0-9]{4}";
-            // string padrao = "[0-9]{4,5}[-]{0,1}[0-9]{4}";
-            // string padrao = "[0-9]{4,5}-{0,1}[0-9]{4}";
-            string padrao = "[0-9]{4,5}-?[0-9]{4}";
-            string textoDeTeste = "Meu nome é Guilherme, me ligue em 4784-4546";
+            TestaArrayInt();
 
-            Match resultado = Regex.Match(textoDeTeste, padrao);
-            Console.WriteLine(resultado.Value);
-            Console.WriteLine();
+            TestaArrayContaCorrente();
 
-                        
+
 
             Console.ReadLine();
         }
@@ -115,6 +64,133 @@ namespace ByteBank.SistemaAgencia
             diaOuDias = " dias ";
 
             return quantidadeMeses + mesOuMeses + quantidadeSemanas + semanaOuSemanas + quantidadeDias + diaOuDias;
+        }
+
+        static void TestaStrings()
+        {
+            // pagina?argumentos
+            // 012345678
+            string url = "pagina?argumentos";
+
+            int indiceInterrogacao = url.IndexOf("?");
+            Console.WriteLine("indiceInterrogacao: " + indiceInterrogacao);
+            string argumentos = url.Substring(indiceInterrogacao + 1);
+            Console.WriteLine(argumentos + "\n");
+
+            string urlParametros = "http://www.bytebank.com/cambio?moedaOrigem=real&moedaDestino=dolar&valor=1500";
+            ExtratorValorDeArgumentosURL extratorValorDeArgumentosURL = new ExtratorValorDeArgumentosURL(urlParametros);
+
+            string valorMoedaOrigem = extratorValorDeArgumentosURL.GetValor("moedaOrigem");
+            Console.WriteLine("Valor de moedaOrigem: " + valorMoedaOrigem);
+            string valorMoedaDestino = extratorValorDeArgumentosURL.GetValor("moedaDestino");
+            Console.WriteLine("Valor de moedaDestino: " + valorMoedaDestino);
+            Console.WriteLine(extratorValorDeArgumentosURL.GetValor("VALOR") + "\n");
+
+            string urlTeste = "https://www.bytebank.com/cambio";
+
+            Console.WriteLine(urlTeste.StartsWith("https://www.bytebank.com"));
+            Console.WriteLine(urlTeste.EndsWith("cambio/"));
+            Console.WriteLine(urlTeste.Contains("Bytebank") + "\n");
+        }
+
+        static void TestaRegex()
+        {
+            // string padrao = "[0123456789][0123456789][0123456789][0123456789][-][0123456789][0123456789][0123456789][0123456789]";
+            // string padrao = "[0-9][0-9][0-9][0-9][-][0-9][0-9][0-9][0-9]";
+            // string padrao = "[0-9]{4,5}[-][0-9]{4}";
+            // string padrao = "[0-9]{4,5}[-]{0,1}[0-9]{4}";
+            // string padrao = "[0-9]{4,5}-{0,1}[0-9]{4}";
+            string padrao = "[0-9]{4,5}-?[0-9]{4}";
+            string textoDeTeste = "Meu nome é Guilherme, me ligue em 4784-4546";
+
+            Match resultado = Regex.Match(textoDeTeste, padrao);
+            Console.WriteLine(resultado.Value + "\n");
+        }
+
+        static void TestaObjects()
+        {
+            Desenvolvedor nickson = new Desenvolvedor("Nickson", "123654987-11", 10000);
+
+            Console.WriteLine("Total de funcionarios: " + Funcionario.TotalDeFuncionarios);
+
+            Designer mv = new Designer("Marcos Vinicius", "123654987-11", 10000);
+            // Teste para verificar se a propriedade TotalDeFuncionarios também é incrementada na instanciação de classes que herdam Funcionario
+            Console.WriteLine("Total de funcionarios: " + Funcionario.TotalDeFuncionarios + "\n");
+
+            Cliente nickson1 = new Cliente("Nickson", "123456789-88", "Desenvolvedor");
+            Cliente nickson2 = new Cliente("Nickson", "123456789-88", "Desenvolvedor");
+
+            bool comparacao = nickson1 == nickson2 ? true : false;
+            Console.WriteLine("nickson1 = nickson2 ? " + comparacao);
+
+            comparacao = nickson1.Equals(nickson2);
+            Console.WriteLine("nickson1 = nickson2 ? " + comparacao + "\n");
+
+            ContaCorrente conta = new ContaCorrente(nickson1, "123", 1597, "Santander");
+
+            // Testa novo método .Equals() da classe ContaCorrente
+            comparacao = nickson1.Equals(conta);
+            Console.WriteLine("nickson1 = conta ? " + comparacao);
+
+            conta.Depositar(1000);
+            conta.Sacar(500);
+
+            // Testa novo método .ToString() da classe ContaCorrente
+            Console.WriteLine(conta);
+        }
+
+        static void TestaArrayInt()
+        {
+            Random rnd = new Random();
+
+            int tamanhoVetor = rnd.Next(1, 20);
+
+            int[] idades = new int[tamanhoVetor];
+
+            for (int indice = 0; indice < tamanhoVetor; indice++)
+            {
+                idades[indice] = rnd.Next(1, 120);
+            }
+
+            int acumulador = 0;
+
+            for (int indice = 0; indice < tamanhoVetor; indice++)
+            {
+                int idade = idades[indice];
+
+                Console.WriteLine($"Acessando o array no indice {indice}");
+                Console.WriteLine($"Valor de idades[{indice}] = {idade}");
+
+                acumulador += idade;
+            }
+
+            double media = acumulador / tamanhoVetor;
+
+            Console.WriteLine($"Total média = {media}\n");
+        }
+
+        static void TestaArrayContaCorrente()
+        {
+            Random rnd = new Random();
+
+            Cliente[] clientes = new Cliente[3];
+
+            Cliente neymar = new Cliente("Neymar", "123", "Jogador de Futebol");
+            Cliente messi = new Cliente("Messi", "456", "Jogador de Futebol");
+            Cliente cr7 = new Cliente("Cristiano Ronaldo", "789", "Jogador de Futebol");
+            
+            ContaCorrente[] contas = new ContaCorrente[]
+            {
+                new ContaCorrente(neymar, "0001", rnd.Next(), "ByteBank01"),
+                new ContaCorrente(messi, "0002", rnd.Next(), "ByteBank01"),
+                new ContaCorrente(cr7, "0003", rnd.Next(), "ByteBank01")
+            };
+
+            for (int indice = 0; indice < clientes.Length; indice++)
+            {
+                ContaCorrente contaAtual = contas[indice];
+                Console.WriteLine($"Conta {indice} {contaAtual.Conta}");
+            }
         }
     }
 }
