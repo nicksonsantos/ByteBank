@@ -228,6 +228,9 @@ namespace ByteBank.SistemaAgencia
             Cliente neymar = new Cliente("Neymar", "123", "Jogador de Futebol");
             Cliente messi = new Cliente("Messi", "456", "Jogador de Futebol");
             Cliente cr7 = new Cliente("Cristiano Ronaldo", "789", "Jogador de Futebol");
+            Cliente john = new Cliente("John", "642", "Empresário");
+            Cliente textor = new Cliente("Textor", "971", "Cozinheiro");
+            Cliente toro = new Cliente("Toro", "135", "Jogador de Futebol");
 
             // Lista 1 inicializada com tamanho 3
             ListaDeContaCorrente listaDeContaCorrente1 = new ListaDeContaCorrente(3);
@@ -246,17 +249,39 @@ namespace ByteBank.SistemaAgencia
             listaDeContaCorrente2.Adicionar(new ContaCorrente(cr7, "0003", 1, "ByteBank01"));
             Console.WriteLine();
 
-            Console.WriteLine(listaDeContaCorrente2);
+            Console.WriteLine("Lista 2:");
+            Console.WriteLine(listaDeContaCorrente2 + "\n");
 
-            Console.WriteLine("A conta do Messi está no indice: " + listaDeContaCorrente2.Encontra(contaDoMessi));
-
+            Console.WriteLine("A conta do Messi está no indice: " + listaDeContaCorrente2.Encontra(contaDoMessi) + "\n");
+            
+            Console.WriteLine("Removendo a conta do Messi\n");
             listaDeContaCorrente2.Remover(contaDoMessi);
 
+            Console.WriteLine("Lista 2");
             Console.WriteLine(listaDeContaCorrente2);
 
             listaDeContaCorrente2.Adicionar(contaDoMessi);
 
+            Console.WriteLine(listaDeContaCorrente2 + "\n");
+
+            for (int i = 0; i < listaDeContaCorrente2.Tamanho; i++)
+            {
+                ContaCorrente conta = listaDeContaCorrente2[i];
+                Console.WriteLine($"{conta.Conta}/{conta.NumeroAgencia}");
+            }
+            Console.WriteLine();
+
+            listaDeContaCorrente2.AdicionarVarios
+            (
+                new ContaCorrente(john, "987", rnd.Next(), "ByteBank01"),
+                new ContaCorrente(textor, "644", rnd.Next(), "ByteBank01"),
+                new ContaCorrente(toro, "428", rnd.Next(), "ByteBank01")
+            );
+            Console.WriteLine();
+            Console.WriteLine("Lista 2:");
             Console.WriteLine(listaDeContaCorrente2);
+
+            
 
             FimDoBloco();
 

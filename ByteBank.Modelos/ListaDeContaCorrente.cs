@@ -10,6 +10,20 @@ namespace ByteBank.Modelos
     {
         private ContaCorrente[] _itens;
         private int _proximaPosicao;
+        public int Tamanho
+        {
+            get
+            {
+                return _proximaPosicao;
+            }
+        }
+        public ContaCorrente this[int indice]
+        {
+            get
+            {
+                return GetItemNoIndice(indice);
+            }
+        }
 
         public ListaDeContaCorrente(int tamanhoLista = 1)
         {
@@ -90,6 +104,24 @@ namespace ByteBank.Modelos
             }
 
             return indiceItem;
+        }
+
+        public ContaCorrente GetItemNoIndice(int indice)
+        {
+            if (indice < 0 || indice >= _proximaPosicao)
+            {
+                throw new ArgumentOutOfRangeException(nameof(indice));
+            }
+
+            return _itens[indice];
+        }
+
+        public void AdicionarVarios(params ContaCorrente[] itens)
+        {
+            foreach (ContaCorrente conta in itens)
+            {
+                Adicionar(conta);
+            }
         }
 
         public override string ToString()
