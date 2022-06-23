@@ -1,6 +1,7 @@
 ﻿using ByteBank.Modelos;
 using ByteBank.Modelos.Funcionarios;
 using Humanizer;
+using System.Text.RegularExpressions;
 
 namespace ByteBank.SistemaAgencia
 {
@@ -59,6 +60,21 @@ namespace ByteBank.SistemaAgencia
             Console.WriteLine(urlTeste.StartsWith("https://www.bytebank.com"));
             Console.WriteLine(urlTeste.EndsWith("cambio/"));
             Console.WriteLine(urlTeste.Contains("Bytebank"));
+            Console.WriteLine();
+
+            // string padrao = "[0123456789][0123456789][0123456789][0123456789][-][0123456789][0123456789][0123456789][0123456789]";
+            // string padrao = "[0-9][0-9][0-9][0-9][-][0-9][0-9][0-9][0-9]";
+            // string padrao = "[0-9]{4,5}[-][0-9]{4}";
+            // string padrao = "[0-9]{4,5}[-]{0,1}[0-9]{4}";
+            // string padrao = "[0-9]{4,5}-{0,1}[0-9]{4}";
+            string padrao = "[0-9]{4,5}-?[0-9]{4}";
+            string textoDeTeste = "Meu nome é Guilherme, me ligue em 4784-4546";
+
+            Match resultado = Regex.Match(textoDeTeste, padrao);
+            Console.WriteLine(resultado.Value);
+            Console.WriteLine();
+
+                        
 
             Console.ReadLine();
         }
