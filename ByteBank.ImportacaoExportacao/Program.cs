@@ -18,7 +18,18 @@ namespace ByteBank.ImportacaoExportacao
 
             //TestaEscrita();
 
-            LeituraBinaria();
+            //LeituraBinaria();
+
+            //StreamDoConsole();
+
+            File.WriteAllText("escrevendoComAClasseFile.txt", "Testando File.WriteAllText");
+            Console.WriteLine("Arquivo escrevendoComAClasseFile.txt criado!");
+
+            var bytesArquivo = File.ReadAllBytes("contas.txt");
+            Console.WriteLine($"Arquivo contas.txt possui {bytesArquivo.Length} bytes");
+
+            var linhas = File.ReadAllLines("contas.txt");
+            Console.WriteLine(linhas.Length);
         }
 
         static void TesteInicialLeituraDeArquivo()
