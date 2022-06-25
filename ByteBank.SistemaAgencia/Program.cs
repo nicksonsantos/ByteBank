@@ -1,5 +1,6 @@
 ﻿using ByteBank.Modelos;
 using ByteBank.Modelos.Funcionarios;
+using ByteBank.SistemaAgencia.Comparadores;
 using ByteBank.SistemaAgencia.Extensoes;
 using Humanizer;
 using System.Text.RegularExpressions;
@@ -375,15 +376,21 @@ namespace ByteBank.SistemaAgencia
             Cliente messi = new Cliente("Messi", "456", "Jogador de Futebol");
             Cliente cr7 = new Cliente("Cristiano Ronaldo", "789", "Jogador de Futebol");
 
-            var contaDoNeymar = new ContaCorrente(neymar, "0001", rnd.Next(), "ByteBank01");
-            var contaDoMessi = new ContaCorrente(messi, "0002", rnd.Next(), "ByteBank01");
-            var contaDoRobozao = new ContaCorrente(cr7, "0003", rnd.Next(), "ByteBank01");
+            var contaDoNeymar = new ContaCorrente(neymar, "0001", 4, "ByteBank01");
+            var contaDoMessi = new ContaCorrente(messi, "0002", 3, "ByteBank01");
+            var contaDoRobozao = new ContaCorrente(cr7, "0003", 1, "ByteBank01");
 
             var contas = new List<ContaCorrente>();
 
             contas.AdicionarVarios(contaDoMessi, contaDoNeymar, contaDoRobozao);
 
-            contas.Sort();
+            contas.Sort(new ComparadorContaCorrentePorAgencia());
+            Console.WriteLine("Lista de Contas Ordenada");
+
+            foreach (var conta in contas)
+            {
+                Console.WriteLine($"Conta número {conta.Conta}, ag. {conta.NumeroAgencia}");
+            }
 
             FimDoBloco();
         }
