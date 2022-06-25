@@ -9,40 +9,41 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            // Alura - Curso de C# parte 5: bibliotecas DLLs, documentação e usando o NuGet
+            //// Alura - Curso de C# parte 5: bibliotecas DLLs, documentação e usando o NuGet
 
-            DateTime dataFimPagamento = new DateTime(2022, 9, 5);
-            DateTime dataCorrente = DateTime.Today;
-            TimeSpan diferencaData = dataFimPagamento - dataCorrente;
-            //Utilizando a minha função
-            string mensagem = "Vencimento em " + GetIntervaloDeTempoLegivel(diferencaData);
-            Console.WriteLine(mensagem);
+            //DateTime dataFimPagamento = new DateTime(2022, 9, 5);
+            //DateTime dataCorrente = DateTime.Today;
+            //TimeSpan diferencaData = dataFimPagamento - dataCorrente;
+            ////Utilizando a minha função
+            //string mensagem = "Vencimento em " + GetIntervaloDeTempoLegivel(diferencaData);
+            //Console.WriteLine(mensagem);
 
-            //Agora utilizando Humanizer
-            mensagem = "Vencimento em " + TimeSpanHumanizeExtensions.Humanize(diferencaData);
-            Console.WriteLine(mensagem + "\n");
+            ////Agora utilizando Humanizer
+            //mensagem = "Vencimento em " + TimeSpanHumanizeExtensions.Humanize(diferencaData);
+            //Console.WriteLine(mensagem + "\n");
 
-            // Alura - Curso de C# parte 6: Strings, expressões regulares e a classe Object
+            //// Alura - Curso de C# parte 6: Strings, expressões regulares e a classe Object
 
-            TestaStrings();
+            //TestaStrings();
 
-            TestaRegex();
+            //TestaRegex();
 
-            TestaObjects();
+            //TestaObjects();
 
-            // Alura - Curso de C# parte 7: Array e tipos genéricos
+            //// Alura - Curso de C# parte 7: Array e tipos genéricos
 
-            TestaArrayInt();
+            //TestaArrayInt();
 
-            TestaArrayContaCorrente();
+            //TestaArrayContaCorrente();
 
-            TestaListaContaCorrente();
+            //TestaListaContaCorrente();
 
-            TestaListaDeObject();
+            //TestaListaDeObject();
 
-            TestaLista();
+            //TestaLista();
 
-            Console.ReadLine();
+            TestaList();
+
         }
 
         static void FimDoBloco()
@@ -325,6 +326,23 @@ namespace ByteBank.SistemaAgencia
                 int idadeAtual = idades[i];
                 Console.WriteLine("Idade: " + idadeAtual);
             }
+
+            FimDoBloco();
+        }
+
+        static void TestaList()
+        {
+            Console.WriteLine("Função TestaList()");
+
+            List<int> idades = new List<int>();
+
+            idades.AdicionarVarios(17, 4, 33, 76);
+
+            for (int i = 0; i < idades.Count; i++)
+            {
+                Console.WriteLine(idades[i]);
+            }
+
 
             FimDoBloco();
         }
