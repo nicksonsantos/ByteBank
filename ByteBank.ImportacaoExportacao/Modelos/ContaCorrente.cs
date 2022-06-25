@@ -60,7 +60,7 @@ namespace ByteBank.ImportacaoExportacao.Modelos
 
             informacoesConta += $"Número da conta: {Numero}, ag. {Agencia} - ";
             informacoesConta += $"Saldo R$ {String.Format("{0:0.00}", Saldo)} - ";
-            informacoesConta += $"Titular da conta: {Titular}\n";
+            informacoesConta += $"Titular da conta: {Titular.Nome}\n";
 
             return informacoesConta;
         }

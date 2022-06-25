@@ -1,5 +1,4 @@
 ﻿using ByteBank.ImportacaoExportacao.Modelos;
-using System.Text;
 
 namespace ByteBank.ImportacaoExportacao
 {
@@ -11,20 +10,36 @@ namespace ByteBank.ImportacaoExportacao
 
             //LidandoComFileStreamDiretamente();
 
-            string enderecoDoArquivo = "contas.txt";
+            //UsarStreamReader();
 
-            using (var fluxoDeArquivo = new FileStream(enderecoDoArquivo, FileMode.Open))
-            using (var leitor = new StreamReader(fluxoDeArquivo))
-            {
-                while (!leitor.EndOfStream)
-                {
-                    var linha = leitor.ReadLine();
-                    Console.WriteLine(linha);
-                }
-            }
+            CriarArquivo();
         }
 
-        
+        static void TesteInicialLeituraDeArquivo()
+        {
+            Console.WriteLine("TesteInicialLeituraDeArquivo()\n");
+            string enderecoDoArquivo = "contas.txt";
+
+            List<ContaCorrente> listaContas = new List<ContaCorrente>();
+
+            try
+            {
+                IEnumerable<string> linhas = File.ReadLines(enderecoDoArquivo);
+
+                foreach (string linha in linhas)
+                {
+                    listaContas.Add(ConverterStringParaContaCorrente(linha));
+                }
+
+                Console.WriteLine(listaContas.ExibeListaContas());
+                Console.WriteLine(ContaCorrente.TotalContaCorrente);
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
 
     }
 }
