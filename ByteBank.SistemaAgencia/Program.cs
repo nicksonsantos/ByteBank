@@ -385,11 +385,29 @@ namespace ByteBank.SistemaAgencia
             contas.AdicionarVarios(contaDoMessi, contaDoNeymar, contaDoRobozao);
 
             contas.Sort(new ComparadorContaCorrentePorAgencia());
-            Console.WriteLine("Lista de Contas Ordenada");
+            Console.WriteLine("\nLista de Contas Ordenada por Sort");
 
             foreach (var conta in contas)
             {
                 Console.WriteLine($"Conta número {conta.Conta}, ag. {conta.NumeroAgencia}");
+            }
+
+            Console.WriteLine("\nLista de Contas Ordenada por OrderBy");
+            var contasOrdenadas = contas.OrderBy(conta =>
+            {
+                if (conta == null)
+                {
+                    return int.MaxValue;
+                }
+                return conta.NumeroAgencia;
+            });
+
+            foreach (var conta in contasOrdenadas)
+            {
+                if (conta != null)
+                {
+                    Console.WriteLine($"Conta número {conta.Conta}, ag. {conta.NumeroAgencia}");
+                }
             }
 
             FimDoBloco();
