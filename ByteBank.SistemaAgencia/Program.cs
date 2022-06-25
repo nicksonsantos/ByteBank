@@ -380,27 +380,36 @@ namespace ByteBank.SistemaAgencia
             var contaDoMessi = new ContaCorrente(messi, "0002", 3, "ByteBank01");
             var contaDoRobozao = new ContaCorrente(cr7, "0003", 1, "ByteBank01");
 
-            var contas = new List<ContaCorrente>();
-
-            contas.AdicionarVarios(contaDoMessi, contaDoNeymar, contaDoRobozao);
-
-            contas.Sort(new ComparadorContaCorrentePorAgencia());
-            Console.WriteLine("\nLista de Contas Ordenada por Sort");
-
-            foreach (var conta in contas)
+            var contas = new List<ContaCorrente>()
             {
-                Console.WriteLine($"Conta número {conta.Conta}, ag. {conta.NumeroAgencia}");
-            }
+                contaDoMessi,
+                null,
+                contaDoNeymar,
+                null,
+                contaDoRobozao
+            };
+
+            //contas.Sort(new ComparadorContaCorrentePorAgencia());
+            //Console.WriteLine("\nLista de Contas Ordenada por Sort");
+
+            //foreach (var conta in contas)
+            //{
+            //    Console.WriteLine($"Conta número {conta.Conta}, ag. {conta.NumeroAgencia}");
+            //}
 
             Console.WriteLine("\nLista de Contas Ordenada por OrderBy");
-            var contasOrdenadas = contas.OrderBy(conta =>
-            {
-                if (conta == null)
-                {
-                    return int.MaxValue;
-                }
-                return conta.NumeroAgencia;
-            });
+            //var contasOrdenadas = contas.OrderBy(conta =>
+            //{
+            //    if (conta == null)
+            //    {
+            //        return int.MaxValue;
+            //    }
+            //    return conta.NumeroAgencia;
+            //});
+
+            IOrderedEnumerable<ContaCorrente> contasOrdenadas = contas
+                .Where(conta => conta != null)
+                .OrderBy(conta => conta.NumeroAgencia);
 
             foreach (var conta in contasOrdenadas)
             {
@@ -410,6 +419,7 @@ namespace ByteBank.SistemaAgencia
                 }
             }
 
+            
             FimDoBloco();
         }
 
