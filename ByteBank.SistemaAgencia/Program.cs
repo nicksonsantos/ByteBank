@@ -333,6 +333,8 @@ namespace ByteBank.SistemaAgencia
 
         static void TestaList()
         {
+            var rnd = new Random();
+
             Console.WriteLine("Função TestaList()");
 
             List<int> idades = new List<int>();
@@ -341,18 +343,50 @@ namespace ByteBank.SistemaAgencia
 
             for (int i = 0; i < idades.Count; i++)
             {
-                Console.WriteLine(idades[i]);
+                Console.WriteLine("idade = " + idades[i]);
             }
 
-            List<string> nomes = new List<string>();
-            nomes.AdicionarVarios("Adoniran", "Jimi Hendrix");
+            Console.WriteLine("Ordenando lista de idades");
+            idades.Sort();
+
+            for (int i = 0; i < idades.Count; i++)
+            {
+                Console.WriteLine("idade = " + idades[i]);
+            }
+            Console.WriteLine();
+
+            var nomes = new List<string>();
+            nomes.AdicionarVarios("Adoniran", "Prince", "Jimi Hendrix", "Barney Stinson", "Gustavo Lima", "Daniel");
 
             for (int i = 0; i < nomes.Count; i++)
             {
-                Console.WriteLine(nomes[i]);
+                Console.WriteLine("nome: " + nomes[i]);
             }
+
+            Console.WriteLine("Ordenando lista de nomes");
+            nomes.Sort();
+
+            for (int i = 0; i < nomes.Count; i++)
+            {
+                Console.WriteLine("nome: " + nomes[i]);
+            }
+
+            Cliente neymar = new Cliente("Neymar", "123", "Jogador de Futebol");
+            Cliente messi = new Cliente("Messi", "456", "Jogador de Futebol");
+            Cliente cr7 = new Cliente("Cristiano Ronaldo", "789", "Jogador de Futebol");
+
+            var contaDoNeymar = new ContaCorrente(neymar, "0001", rnd.Next(), "ByteBank01");
+            var contaDoMessi = new ContaCorrente(messi, "0002", rnd.Next(), "ByteBank01");
+            var contaDoRobozao = new ContaCorrente(cr7, "0003", rnd.Next(), "ByteBank01");
+
+            var contas = new List<ContaCorrente>();
+
+            contas.AdicionarVarios(contaDoMessi, contaDoNeymar, contaDoRobozao);
+
+            contas.Sort();
 
             FimDoBloco();
         }
+
     }
 }
