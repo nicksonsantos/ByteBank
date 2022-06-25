@@ -12,7 +12,13 @@ namespace ByteBank.ImportacaoExportacao
 
             //UsarStreamReader();
 
-            CriarArquivo();
+            //CriarArquivo();
+
+            //CriarArquivoComWriter();
+
+            //TestaEscrita();
+
+            LeituraBinaria();
         }
 
         static void TesteInicialLeituraDeArquivo()
