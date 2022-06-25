@@ -1,5 +1,6 @@
 ﻿using ByteBank.Modelos;
 using ByteBank.Modelos.Funcionarios;
+using ByteBank.SistemaAgencia.Extensoes;
 using Humanizer;
 using System.Text.RegularExpressions;
 
@@ -343,6 +344,13 @@ namespace ByteBank.SistemaAgencia
                 Console.WriteLine(idades[i]);
             }
 
+            List<string> nomes = new List<string>();
+            nomes.AdicionarVarios("Adoniran", "Jimi Hendrix");
+
+            for (int i = 0; i < nomes.Count; i++)
+            {
+                Console.WriteLine(nomes[i]);
+            }
 
             FimDoBloco();
         }
